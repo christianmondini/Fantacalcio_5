@@ -49,5 +49,24 @@ foreign key (id_fantasquadra) references fanta_squadra(id),
 foreign key (id_calciatore) references calciatore(id)
 );
 
+create table lega(
+id int primary key,
+nome nvarchar(100) not null
+);
+
+
+create table giocatore_lega(
+id_giocatore int,
+id_lega int,
+constraint pk_giocatore_lega primary key(id_giocatore,id_lega),
+constraint fk_giocatore foreign key(id_giocatore) references giocatore(id),
+constraint fk_lega foreign key(id_lega) references lega(id)
+);
+
+
+
+
+
+
 
 
