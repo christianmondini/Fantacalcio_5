@@ -2,29 +2,23 @@
 class Database
 {
 
-    //credentials localhost
-    private $server_local = "localhost";
-    private $user_local = "root";
-    private $passwd_local = "";
-    private $db_local = "fantacalcio";
-    // private $db_local = "sandwiches_copy";
-
-    //common credentials
-    private $port = "3306";
     public $conn;
 
-    public function connect() //effettua la connessione al server
+    protected $server="localhost";
 
-    {
-        try {
-            $this->conn = new mysqli($this->server_local, $this->user_local, $this->passwd_local, $this->db_local, $this->port);
-        }
-        //la classe mysqli non estende l'interfaccia Throwable e non può essere usata come un'eccezione. 
-        catch (Exception $ex) {
-            die("Error connecting to database $ex\n\n");
-        }
+    protected $user="root";
+
+    protected $password="";
+
+    protected $db="fantacalcio";
+
+    protected $port=3306;
+
+    public function connect(){
+        $this->conn=new mysqli($this->server,$this->user,$this->password,$this->port);
         return $this->conn;
     }
+  
 }
 
 ?>

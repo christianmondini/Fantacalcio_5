@@ -10,24 +10,9 @@ define(
     )
 );
 
-/*
-$this->SetHeaders($headers);
-
-        $arr = array();
-        while ($row = $data->fetch_assoc()) {
-            array_push($arr, $row);
-        }
-        print_r(json_encode($arr, JSON_PRETTY_PRINT));
-        exit;
-*/ 
-
-/*
-
-            $this->conn->real_escape_string($id)
-*/ 
 
 
-Class Fantacalcio{
+Class Controller{
 
     protected $conn;
 
@@ -36,12 +21,12 @@ Class Fantacalcio{
         $this->conn = $db;
     }
 
-    function NewGiocatore($nome_giocatore){
+    function NewGiocatore($nome,$email,$password){
         $sql="INSERT INTO giocatore
-              VALUES ('$nome_giocatore',500);";
+              VALUES ('','$nome','$email','$password',500);";
         
         $response=$this->conn->query($sql);
-        return json_encode($response);
+        return $response;
     }
 
     function NewLega($nome_lega,$n_componenti){
