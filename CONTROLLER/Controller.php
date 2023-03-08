@@ -90,14 +90,12 @@ Class Controller{
     public function getID($email,$password){
         $sql="SELECT id
               FROM giocatore
-               WHERE email='$email' AND password='$password';";
+               WHERE email='$email' AND `password`='$password';";
 
         $result=$this->conn->query($sql);
-        if(!$result){
-            return -1;
-        }else{
+        
             return $result;
-        }
+        
 
         
     }

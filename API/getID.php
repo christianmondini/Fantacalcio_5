@@ -18,16 +18,19 @@ $controller=new Controller($conn);
 
 $result=$controller->getID($email,$password);
 
-echo($result);
 
 $id=$result->fetch_assoc();
 
+print_r($id);
 
+if($id['id']==1){
+    header('Location: http://localhost/Fantacalcio_5/Pages/navbar.php');
+}
 
-
+/*
 session_start();
 $SESSION["id"]=$id;
 
-echo($SESSION["id"]);
+echo($SESSION["id"]);*/
 
 ?>
