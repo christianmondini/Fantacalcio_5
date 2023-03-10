@@ -96,8 +96,6 @@ Class Controller{
         
             return $result;
         
-
-        
     }
 
     

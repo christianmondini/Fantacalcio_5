@@ -1,3 +1,14 @@
+<?php 
+
+session_start();
+
+if($_SESSION["id"]==null){
+  header("Location: http://localhost/Fantacalcio_5/Pages/login.php");
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -9,31 +20,31 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
 
-  <!--CSS-->
-  <link rel="stylesheet" href="../CSS/style.css">
-
-  <!--JS-->
-  <script src="../JS/password.js"></script>
 </head>
 
 <body>
   <?php require("navbar.php");
 
-  $page = 0;
+
+if(isset($_GET["page"])){
+  $page = $_GET["page"];
 
   switch ($page) {
     case 0:
-      require("login.php");
+      require "leghe.php" ;
       break;
     case 1:
       break;
     case 2:
       break;
     case 3:
+      require "logout.php";
       break;
-      default:
-      //require("../API/signup.php");
   }
+}else{
+  require "leghe.php";
+}
+ 
 
   ?>
 

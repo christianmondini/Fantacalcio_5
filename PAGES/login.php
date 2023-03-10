@@ -1,23 +1,39 @@
 
 
+<!doctype html>
+<html lang="en">
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fantacalcio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
 
-<?php 
-/*
-require("../API/getID.php");
+  <!--CSS-->
+  <link rel="stylesheet" href="../CSS/style.css">
+
+  <!--JS-->
+  <script src="../JS/password.js"></script>
+</head>
+
+<body>
+<?php
+
 session_start();
+$_SESSION["id"]=null;
 
-$SESSION["id"]=$id;
+if($_SESSION["prova"]==1){
+    echo('<div class="row" id="avvertenza"><h1>Non sei registrato</h1></div>');
+}
 
-print_r($SESSION["id"]);
-echo($SESSION["id"]);
-*/
 ?>
 
 
 <form method="post" action="../API/getID.php">
 
-    <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
             <div class="card text-black" id="card" style="border-radius: 1rem;">
                 <div class="card-body text-center">
@@ -39,9 +55,6 @@ echo($SESSION["id"]);
                             <input type="checkbox" onclick="myFunction()">Show Password
 
                         </div>
-
-                        <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
-
                         <button class="btn btn-outline-light btn-lg px-5" id="login" type="submit">Login</button>
 
 
@@ -52,3 +65,7 @@ echo($SESSION["id"]);
         </div>
     </div>
 </form>
+
+</body>
+
+</html>

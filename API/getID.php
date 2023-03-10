@@ -2,13 +2,20 @@
 require("../COMMON/connect.php");
 require("../CONTROLLER/Controller.php");
 
+session_start();
 
+$_SESSION["prova"]=0;
+
+
+$email=null;
+$password=null;
+
+if(isset($_POST["email"]) && isset($_POST["password"])){
 $email=$_POST["email"];
 $password=$_POST["password"];
+}
 
-/*
-echo($email);
-echo($password);*/
+
 
 $database=new Database();
 
@@ -18,19 +25,25 @@ $controller=new Controller($conn);
 
 $result=$controller->getID($email,$password);
 
+/*
+$prova=$result->fetch_assoc();
 
+print_r($prova["id"]);*/
+
+if($result){
+    
 $id=$result->fetch_assoc();
 
-print_r($id);
-
-if($id['id']==1){
-    header('Location: http://localhost/Fantacalcio_5/Pages/navbar.php');
+$_SESSION["id"]=$id["id"];
 }
 
-/*
-session_start();
-$SESSION["id"]=$id;
+if($_SESSION["id"]!=null){  
+    echo($_SESSION["id"]);
+    header("Location: http://localhost/Fantacalcio_5/Pages/Index.php");
+}else{
+    $_SESSION["prova"]=1;
+    header("Location: http://localhost/Fantacalcio_5/Pages/login.php");
+}
 
-echo($SESSION["id"]);*/
 
 ?>
