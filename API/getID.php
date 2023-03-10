@@ -4,7 +4,6 @@ require("../CONTROLLER/Controller.php");
 
 session_start();
 
-$_SESSION["prova"]=0;
 
 
 $email=null;

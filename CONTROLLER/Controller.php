@@ -98,6 +98,26 @@ Class Controller{
         
     }
 
+    public function getLeghe($id_giocatore){
+        $sql="SELECT l.nome,l.id
+            FROM lega l
+            INNER JOIN giocatore_lega gl ON gl.id_lega=l.id
+            INNER JOIN giocatore g ON gl.id_giocatore=g.id
+            WHERE g.id='$id_giocatore'";
+
+        $result=$this->conn->query($sql);
+
+        return $result;
+    }
+
+    public function Delete_lega($id_giocatore,$id_lega){
+            $sql="DELETE *
+                   FROM giocatore_lega gl 
+                   INNER JOIN lega l ON l.id=gl.id_leaga
+                   INNER JOIN giocatore g ON g.id=gl.id_giocatore
+                   WHERE g.id='$id_giocatore' AND l.id='$id_lega';";
+    }
+
     
 
     function AssegnaCalciatore($id_calciatore,$id_giocatore){
@@ -105,6 +125,9 @@ Class Controller{
         $query="INSERT INTO ";
 
     }
+
+
+
 }
 
 ?>

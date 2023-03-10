@@ -24,6 +24,8 @@
 session_start();
 $_SESSION["id"]=null;
 
+$_SESSION["prova"];
+
 if($_SESSION["prova"]==1){
     echo('<div class="row" id="avvertenza"><h1>Non sei registrato</h1></div>');
 }
