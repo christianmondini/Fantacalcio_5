@@ -22,18 +22,13 @@
 <?php
 
 session_start();
-$_SESSION["id"]=null;
 
-$_SESSION["prova"]=1;
-
-if($_SESSION["prova"]==1){
-    echo('<div class="row" id="avvertenza"><h1>Non sei registrato</h1></div>');
-}
 
 ?>
 
+<div class="row text-center"><h1>Registrati</h1></div>
 
-<form method="post" action="../API/getID.php">
+<form method="post" action="../API/signup.php">
 
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -43,6 +38,12 @@ if($_SESSION["prova"]==1){
                     <div class="mb-md-5 mt-md-4 pb-5">
                         <div class="fadeIn first logo">
                             <img id="icona" src="../IMAGES/icona-pallone.png" />
+                        </div>
+
+                        <div class="form-outline form-white mb-4">
+                            <label class="form-label" type="text">Nome</label>
+                            <input  id="text" name="nome" class="form-control form-control-lg" />
+
                         </div>
 
                         <div class="form-outline form-white mb-4">
@@ -57,9 +58,7 @@ if($_SESSION["prova"]==1){
                             <input type="checkbox" onclick="myFunction()">Show Password
 
                         </div>
-                        <button class="btn btn-outline-light btn-lg px-5" id="login" type="submit">Login</button>
-                        <br>
-                        <a href="http://localhost/Fantacalcio_5/Pages/signup.php">Non sei registrato?</a>
+                        <button class="btn btn-outline-light btn-lg px-5" id="login" type="submit">Registrati</button>
 
 
                     </div>

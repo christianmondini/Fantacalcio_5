@@ -7,18 +7,26 @@ $database=new Database();
 
 $conn=$database->connect();
 
-$nome=$_GET["nome"];
-$email=$_GET["email"];
-$password=$_GET["password"];
+$nome=null;
+$cognome=null;
+$email=null;
+$password=null;
+
+if(isset($_POST["nome"])&&$_POST["email"]&&$_POST["password"]){
+
+    $nome=$_POST["nome"];
+    $email=$_POST["email"];
+    $password=$_POST["password"];
+}
 
 
 $controller=new Controller($conn);
 
 $result=$controller->NewGiocatore($nome,$email,$password);
 
-$oki=$result->fetch_assoc();
 
-print_r($result);
+ header("Location: http://localhost/Fantacalcio_5/Pages/login.php");
+
 
 ?>
 

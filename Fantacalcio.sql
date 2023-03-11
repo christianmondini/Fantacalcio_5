@@ -60,6 +60,7 @@ nome nvarchar(100) not null
 create table giocatore_lega(
 id_giocatore int,
 id_lega int,
+punti int,
 constraint pk_giocatore_lega primary key(id_giocatore,id_lega),
 foreign key(id_giocatore) references giocatore(id),
 foreign key(id_lega) references lega(id)
@@ -69,6 +70,20 @@ foreign key(id_lega) references lega(id)
 INSERT INTO calciatore (nome,ruolo,valore_iniziale,id_squadra)
 SELECT nome_calciatore,ruolo_calciatore,quotazione,id_squadra
 FROM import;
+
+
+create table giocatore_calciatore
+(
+id_giocatore int,
+id_calciatore int,
+id_lega int,
+foreign key(id_calciatore) references calciatore(id),
+foreign key(id_giocatore) references giocatore(id),
+foreign key(id_lega) references lega(id)
+
+);
+
+
 
 
 
