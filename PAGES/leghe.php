@@ -17,6 +17,8 @@ while ($row = $result->fetch_assoc()) {
 }
 
 ?>
+
+
 <div class="row text-center">
   <h1>Le tue Leghe</h1>
 </div>
@@ -31,6 +33,12 @@ while ($row = $result->fetch_assoc()) {
     <?php foreach ($leghe as $row) : ?>
       <tr>
         <td><?php echo ($row["nome"]); ?></td>
+        <td>
+          <form action="../API/enter.php" method="post">
+            <input type="hidden" name="id_lega" value="<?php echo ($row["id"]) ?>" />
+            <button type="submit" class="btn btn-danger">Entra</button>
+          </form>
+        </td>
         <td>
           <form action="../API/exit_lega.php" method="post">
             <input type="hidden" name="id_lega" value="<?php echo ($row["id"]) ?>" />
@@ -47,15 +55,18 @@ while ($row = $result->fetch_assoc()) {
 <div class="container">
   <div class="row justify-content-center">
   <div class="col-4">
-
-  </div>
-  <div class="col-4">
-
-  </div>
-  <div class="col-4">
-    <form action="../API/" method="post">
+  <form action="../API/entryLega.php" method="post">
       <input type="text" name="nome_lega" class="form-control form-control-sm" />
-      <button class="btn btn-danger" type="submit">AGGIUNGI</button>
+      <button class="btn btn-danger" type="submit">UNISCITI AD UNA LEGA GIA' ESISTENTE</button>
+    </form>
+  </div>
+  <div class="col-4">
+
+  </div>
+  <div class="col-4">
+    <form action="../API/addLega.php" method="post">
+      <input type="text" name="nome_lega" class="form-control form-control-sm" />
+      <button class="btn btn-danger" type="submit">CREA UNA NUOVA LEGA</button>
     </form>
   </div>
     </div>

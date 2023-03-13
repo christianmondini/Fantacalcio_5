@@ -106,16 +106,56 @@ Class Controller{
         return $result;
     }
 
+    public function Get_ID_Lega($nome_lega){
+            $sql="SELECT id
+                  FROM lega
+                  WHERE nome='$nome_lega';";
+
+            $result=$this->conn->query($sql);
+
+            $id_lega=$result->fetch_assoc();
+
+            return $id_lega["id"];
+    }
+
     public function Delete_lega($id_giocatore,$id_lega){
 
             $sql="DELETE 
                    FROM giocatore_lega  
-                   WHERE giocatore_id='$id_giocatore' AND lega_id='$id_lega';";
+                   WHERE id_giocatore='$id_giocatore' AND id_lega='$id_lega';";
             
                   
             $result=$this->conn->query($sql);
 
             return $result;
+    }
+
+    public function Add_lega($id_giocatore,$nome_lega){
+
+        $sql="INSERT INTO lega(nome)
+              VALUES('$nome_lega');";
+        
+        $this->conn->query($sql);
+
+        unset($sql);
+
+        $id_lega=$this->Get_ID_Lega($nome_lega);
+        echo($id_lega);
+
+        $sql="INSERT INTO giocatore_lega(id_giocatore,id_lega)
+              VALUES ('$id_giocatore','$id_lega');";
+
+        $this->conn->query($sql);
+    }
+
+    public function Entry_Lega($id_giocatore,$nome_lega){
+
+        $id_lega=$this->Get_ID_Lega($nome_lega);
+
+        $sql="INSERT INTO giocatore_lega(id_giocatore,id_lega)
+              VALUES ('$id_giocatore','$id_lega');";
+
+        $this->conn->query($sql);
     }
 
     

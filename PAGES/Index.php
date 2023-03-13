@@ -43,6 +43,9 @@ if(isset($_GET["page"])){
     case 3:
       require "logout.php";
       break;
+      case 4:
+        require "exitLega.php";
+        break;
   }
 }else{
   require "leghe.php";

@@ -23,6 +23,7 @@
 
 session_start();
 $_SESSION["id"]=null;
+$_SESSION["id_lega"]=null;
 
 $_SESSION["prova"]=1;
 

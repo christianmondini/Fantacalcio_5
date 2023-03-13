@@ -16,11 +16,8 @@ $conn=$db->connect();
 $controller=new Controller($conn);
 
 $result=$controller->Delete_lega($_SESSION["id"],$id_lega);
-/*
-echo($_POST["id_lega"]);
-echo($_SESSION["id"]);*/
 
-    //header("Location: http://localhost/Fantacalcio_5/Pages/Index.php");
+header("Location: http://localhost/Fantacalcio_5/Pages/Index.php");
 
 
 ?>
