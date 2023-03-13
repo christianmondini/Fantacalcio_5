@@ -107,21 +107,15 @@ Class Controller{
     }
 
     public function Delete_lega($id_giocatore,$id_lega){
-            $sql="DELETE *
-                   FROM giocatore_lega gl 
-                   INNER JOIN lega l ON l.id=gl.id_lega
-                   INNER JOIN giocatore g ON g.id=gl.id_giocatore
-                   WHERE g.id='$id_giocatore' AND l.id='$id_lega';";
+
+            $sql="DELETE 
+                   FROM giocatore_lega  
+                   WHERE giocatore_id='$id_giocatore' AND lega_id='$id_lega';";
             
-            $this->conn->query($sql);
-
-            unset($sql);
-
-            $sql="DELETE * 
-                  FROM lega l
-                  WHERE l.id='$id_lega';";
                   
-            $this->conn->query($sql);
+            $result=$this->conn->query($sql);
+
+            return $result;
     }
 
     
