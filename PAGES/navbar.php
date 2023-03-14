@@ -14,7 +14,10 @@
           <?php endif;?>
           <?php if(isset($_SESSION["id_lega"])):?>
           <li class="nav-item">
-            <a class="nav-link active" id="navbar-text" href="?page=2">Calciatori</a>
+            <a class="nav-link active" id="navbar-text" href="?page=2">I tuoi giocatori</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" id="navbar-text" href="?page=1">Tutti i giocatori</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" id="navbar-text" href="?page=4">Esci</a>

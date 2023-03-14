@@ -17,6 +17,6 @@ $controller=new Controller($conn);
 
 $_SESSION["id_lega"]=$id_lega;
 
-header("Location: http://localhost/Fantacalcio_5/Pages/");
+header("Location: http://localhost/Fantacalcio_5/Pages/Index.php?page=2");
 
 ?>

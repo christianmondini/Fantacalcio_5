@@ -20,30 +20,6 @@ Class Controller{
     }
 
 
-    public function ShowData($data){
-
-        $result=array();
-
-        while($row=$data->fetch_assoc()){
-            array_push($result,$row);
-        }
-
-        print_r($result);
-
-    }
-
-    public function ReturnData($data){
-
-        $result=array();
-
-        while($row=$data->fetch_assoc()){
-            array_push($result,$row);
-        }
-
-        return $result;
-
-    }
-
 
     public function NewGiocatore($nome,$email,$password){
         $sql="INSERT INTO giocatore(nome,email,`password`,crediti)
@@ -74,13 +50,41 @@ Class Controller{
 
     }
 
-    public function Get_calciatori(){
-        $sql="SELECT nome,ruolo,valore_iniziale
-              FROM  calciatore;";
+    public function Get_Calciatori(){
+        $sql="SELECT c.nome as nome,ruolo as ruolo , s.nome as squadra,valore_iniziale as valore
+              FROM  calciatore c
+              LEFT JOIN squadra s ON s.id=c.id_squadra;";
         
         $result=$this->conn->query($sql);
         
         return $result;
+    }
+
+    public function Get_Calciatori_Altrui($id_giocatore,$id_lega){
+        $sql="SELECT c.nome as nome,ruolo as ruolo , s.nome as squadra,valore_iniziale as valore
+              FROM  calciatore c
+              LEFT JOIN squadra s ON s.id=c.id_squadra
+              LEFT JOIN giocatore_calciatore gc ON c.id=gc.id_calciatore
+              WHERE gc.id_giocatore!='$id_giocatore' AND gc.id_lega='$id_lega';";
+        
+        $result=$this->conn->query($sql);
+        
+        return $result;
+    }
+
+
+    public function Get_Calciatori_Utente($id_giocatore,$id_lega){
+
+        $sql="SELECT c.nome as nome,c.ruolo as ruolo ,s.nome as squadra,c.valore_iniziale as valore
+              FROM calciatore c 
+              LEFT JOIN squadra s ON s.id=c.id_squadra
+              INNER JOIN giocatore_calciatore gc ON gc.id_calciatore=c.id
+              LEFT JOIN giocatore g ON g.id=gc.id_giocatore 
+              WHERE g.id='$id_giocatore' AND gc.id_lega='$id_lega';";
+
+        $response=$this->conn->query($sql);
+
+        return $response;
     }
 
     public function getID($email,$password){
@@ -92,6 +96,15 @@ Class Controller{
         
             return $result;
         
+    }
+
+    public function Get_Nome_Lega($id_lega){
+        $sql="SELECT nome
+              FROM lega 
+              WHERE id='$id_lega';";
+        $response=$this->conn->query($sql);
+
+        return $response;
     }
 
     public function getLeghe($id_giocatore){

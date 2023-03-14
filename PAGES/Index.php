@@ -37,8 +37,10 @@ if(isset($_GET["page"])){
       require "leghe.php" ;
       break;
     case 1:
+        require "giocatori_svincolati.php";
       break;
     case 2:
+      require "giocatori.php";
       break;
     case 3:
       require "logout.php";
