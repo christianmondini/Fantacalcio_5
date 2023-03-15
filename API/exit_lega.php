@@ -15,7 +15,7 @@ $conn=$db->connect();
 
 $controller=new Controller($conn);
 
-$result=$controller->Delete_lega($_SESSION["id"],$id_lega);
+$result=$controller->Exit_lega($_SESSION["id"],$id_lega);
 
 header("Location: http://localhost/Fantacalcio_5/Pages/Index.php");
 
