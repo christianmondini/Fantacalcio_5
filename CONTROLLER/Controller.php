@@ -40,6 +40,18 @@ Class Controller{
         return $result;
     }
 
+    public function Get_ID_ByName($nome_giocatore){
+        $sql="SELECT id
+              FROM giocatore
+              WHERE nome='$nome_giocatore';";
+
+        $response=$this->conn->query($sql);
+
+        $id=$response->fetch_assoc();
+
+        return $id["id"];
+    }
+
     public function NewLega($nome_lega,$n_componenti){
         $sql="INSERT INTO lega 
             VALUES ('$nome_lega','$n_componenti');";
@@ -155,8 +167,8 @@ Class Controller{
         $id_lega=$this->Get_ID_Lega($nome_lega);
         echo($id_lega);
 
-        $sql="INSERT INTO giocatore_lega(id_giocatore,id_lega)
-              VALUES ('$id_giocatore','$id_lega');";
+        $sql="INSERT INTO giocatore_lega(id_giocatore,id_lega,creatore)
+              VALUES ('$id_giocatore','$id_lega','1');";
 
         $this->conn->query($sql);
     }
@@ -171,12 +183,57 @@ Class Controller{
         $this->conn->query($sql);
     }
 
+
+    public function Get_Creatore($id_giocatore,$id_lega){
+        $sql="SELECT g.nome,gl.creatore
+              FROM giocatore g
+              INNER JOIN giocatore_lega gl ON g.id=gl.id_giocatore
+              WHERE gl.id_giocatore='$id_giocatore' AND gl.id_lega='$id_lega';";
+        
+        $response=$this->conn->query($sql);
+
+        return $response;
+
+    }
+
     
 
-    function AssegnaCalciatore($id_calciatore,$id_giocatore){
+    function AssegnaCalciatore($nome_giocatore,$nome_calciatore,$id_lega){
 
-        $query="INSERT INTO ";
+        $id_giocatore=$this->Get_ID_ByName($nome_giocatore);
 
+        $id_calciatore=$this->Get_ID_ByName_Calciatore($nome_calciatore);
+
+        $sql="INSERT INTO giocatore_calciatore(id_giocatore,id_calciatore,id_lega)
+                VALUES('$id_giocatore','$id_calciatore','$id_lega');";
+
+        $this->conn->query($sql);
+
+    }
+
+    public function TogliCalciatore($nome_giocatore,$nome_calciatore,$id_lega){
+
+        $id_giocatore=$this->Get_ID_ByName($nome_giocatore);
+
+        $id_calciatore=$this->Get_ID_ByName_Calciatore($nome_calciatore);
+
+        $sql="DELETE 
+              FROM giocatore_calciatore
+              WHERE id_giocatore='$id_giocatore' AND id_calciatore='$id_calciatore' AND id_lega='$id_lega';";
+
+        $this->conn->query($sql);
+    }
+
+    public function Get_ID_ByName_Calciatore($nome_calciatore){
+        $sql="SELECT id
+              FROM calciatore
+              WHERE nome='$nome_calciatore';";
+
+        $response=$this->conn->query($sql);
+
+        $id=$response->fetch_assoc();
+
+        return $id["id"];
     }
 
 

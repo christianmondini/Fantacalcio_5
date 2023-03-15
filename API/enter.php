@@ -17,6 +17,14 @@ $controller=new Controller($conn);
 
 $_SESSION["id_lega"]=$id_lega;
 
+
+
+$creatore=$controller->Get_Creatore($_SESSION["id"],$_SESSION["id_lega"]);
+
+$giocatore=$creatore->fetch_assoc();
+
+$_SESSION["creatore"]=$giocatore["creatore"];
+
 header("Location: http://localhost/Fantacalcio_5/Pages/Index.php?page=2");
 
 ?>

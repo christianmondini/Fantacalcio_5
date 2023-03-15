@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 session_start();
 
-if($_SESSION["id"]==null){
+if ($_SESSION["id"] == null) {
   header("Location: http://localhost/Fantacalcio_5/Pages/login.php");
 }
 
@@ -29,30 +29,36 @@ if($_SESSION["id"]==null){
   <?php require("navbar.php");
 
 
-if(isset($_GET["page"])){
-  $page = $_GET["page"];
+  if (isset($_GET["page"])) {
+    $page = $_GET["page"];
 
-  switch ($page) {
-    case 0:
-      require "leghe.php" ;
-      break;
-    case 1:
+    switch ($page) {
+      case 0:
+        require "leghe.php";
+        break;
+      case 1:
         require "giocatori_svincolati.php";
-      break;
-    case 2:
-      require "giocatori.php";
-      break;
-    case 3:
-      require "logout.php";
-      break;
+        break;
+      case 2:
+        require "giocatori.php";
+        break;
+      case 3:
+        require "logout.php";
+        break;
       case 4:
         require "exitLega.php";
         break;
+      case 5:
+        require "assegna_calciatore.php";
+        break;
+        case 6:
+          require "togli_calciatore.php";
+          break;
+    }
+  } else {
+    require "leghe.php";
   }
-}else{
-  require "leghe.php";
-}
- 
+
 
   ?>
 

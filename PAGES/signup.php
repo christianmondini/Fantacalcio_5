@@ -26,7 +26,6 @@ session_start();
 
 ?>
 
-<div class="row text-center"><h1>Registrati</h1></div>
 
 <form method="post" action="../API/signup.php">
 
@@ -34,6 +33,8 @@ session_start();
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
             <div class="card text-black" id="card" style="border-radius: 1rem;">
                 <div class="card-body text-center">
+
+                <div class="row text-center"><h1>Registrati</h1></div>
 
                     <div class="mb-md-5 mt-md-4 pb-5">
                         <div class="fadeIn first logo">
@@ -59,6 +60,8 @@ session_start();
 
                         </div>
                         <button class="btn btn-outline-light btn-lg px-5" id="login" type="submit">Registrati</button>
+                        <br>
+                        <a href="http://localhost/Fantacalcio_5/Pages">Torna al Login</a>
 
 
                     </div>

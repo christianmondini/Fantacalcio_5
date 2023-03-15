@@ -27,9 +27,12 @@ $_SESSION["id_lega"]=null;
 
 $_SESSION["prova"]=1;
 
+$_SESSION["creatore"]=0;
+
+/*
 if($_SESSION["prova"]==1){
     echo('<div class="row" id="avvertenza"><h1>Non sei registrato</h1></div>');
-}
+}*/
 
 ?>
 
@@ -40,6 +43,8 @@ if($_SESSION["prova"]==1){
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
             <div class="card text-black" id="card" style="border-radius: 1rem;">
                 <div class="card-body text-center">
+
+                <div class="row text-center"><h1>Login</h1></div>
 
                     <div class="mb-md-5 mt-md-4 pb-5">
                         <div class="fadeIn first logo">

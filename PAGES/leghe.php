@@ -16,6 +16,7 @@ while ($row = $result->fetch_assoc()) {
   array_push($leghe, $row);
 }
 
+
 ?>
 
 
