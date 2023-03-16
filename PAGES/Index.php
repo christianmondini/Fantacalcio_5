@@ -37,10 +37,10 @@ if ($_SESSION["id"] == null) {
         require "leghe.php";
         break;
       case 1:
-        require "giocatori_svincolati.php";
+        require "tutti_calciatori.php";
         break;
       case 2:
-        require "giocatori.php";
+        require "calciatori.php";
         break;
       case 3:
         require "logout.php";
@@ -54,6 +54,12 @@ if ($_SESSION["id"] == null) {
         case 6:
           require "togli_calciatore.php";
           break;
+          case 7:
+            require "giornata.php";
+            break;
+            case 8:
+              require "giocatori.php";
+              break;
     }
   } else {
     require "leghe.php";

@@ -83,16 +83,6 @@ Class Controller{
 
 /*-------------------------------------------OPZIONI LEGA-------------------------------------------------------------------------------------------------*/ 
 
-    public function NewLega($nome_lega,$n_componenti){
-        $sql="INSERT INTO lega 
-            VALUES ('$nome_lega','$n_componenti');";
-
-        $response=$this->conn->query($sql);
-
-        return json_encode($response);
-
-    }
-
     
     public function Get_Nome_Lega($id_lega){
         $sql="SELECT nome
@@ -141,8 +131,8 @@ public function Exit_lega($id_giocatore,$id_lega){
 
 public function Add_lega($id_giocatore,$nome_lega){
 
-    $sql="INSERT INTO lega(nome)
-          VALUES('$nome_lega');";
+    $sql="INSERT INTO lega(nome,campionato_iniziato) 
+           VALUES ('$nome_lega','0');";
     
     $this->conn->query($sql);
 
@@ -169,6 +159,14 @@ public function Entry_Lega($id_giocatore,$nome_lega){
 
 
 public function Delete_Lega($id_lega){
+    $sql="DELETE 
+          FROM giocatore_lega
+          WHERE l.id='$id_lega';";
+          
+    $this->conn->query($sql);
+
+    unset($sql);
+
     $sql="DELETE 
           FROM lega
           WHERE l.id='$id_lega';";
@@ -258,8 +256,124 @@ public function Delete_Lega($id_lega){
         return $id["id"];
     }
 
+    /*-------------------------------------------------------------OPZIONI GIORNATA-------------------------------------------------------------------------------------------*/ 
+
+
+public function Get_Inizio_Campionato($id_lega){
+
+    $sql="SELECT campionato_iniziato
+          FROM lega 
+          WHERE id='$id_lega';";
+
+    $response=$this->conn->query($sql);
+
+    return $response;
+}
+
+
+public function Inizia_Campionato($id_lega){
+   
+    $sql="UPDATE lega
+          SET campionato_iniziato=1
+          WHERE id='$id_lega';";
+
+    $this->conn->query($sql);
+
+    $this->Prepara_Giornate($id_lega);
+
+
+    unset($sql);
+    $response=$this->Get_Inizio_Campionato($id_lega);
+
+    return $response;
+}
+
+
+
+public function Get_Partecipanti($id_lega){
+
+    $sql="SELECT DISTINCT g.id as id_giocatore,g.nome as nome_giocatore
+          FROM giocatore g
+          INNER JOIN giocatore_lega gl ON g.id=gl.id_giocatore
+          LEFT JOIN lega l ON l.id=gl.id_lega
+          WHERE l.id='$id_lega';";
+    
+    $response=$this->conn->query($sql);
+
+    return $response;
+}
+
+
+//Preparo tutte le partite di andata e ritorno tra tutti i giocatori
+public function Prepara_Giornate($id_lega){
+
+    $n_giocatori=0;
+    
+    $result=$this->Get_Partecipanti($id_lega);
+
+    $giocatori=array();
+
+    while($row=$result->fetch_assoc()){
+        array_push($giocatori,$row);
+        $n_giocatori++;
+    }
+
+
+
+    //conti le partite in casa per ogni giocatore e sicuramente nelle partite in casa di un giocatore sono incluse quelle fuori casa degli altri
+    //$n_partite=$n_giocatori*($n_giocatori-1);
+
+    for($i=0;$i<($n_giocatori);$i++){
+
+        for($j=0;$j<($n_giocatori);$j++){
+
+            //Se non è lo stesso giocatore
+            if($i!=$j){
+
+                $giocatore1=$giocatori[$i]["id_giocatore"];
+                $giocatore2=$giocatori[$j]["id_giocatore"];
+
+
+                $sql="INSERT INTO giornata(id_giocatore1,id_giocatore2,risultato,id_lega)
+                      VALUES('$giocatore1','$giocatore2',0,'$id_lega');";
+
+                $this->conn->query($sql);
+
+                unset($sql);
+            }
+
+        }
+
+    }
 
 
 }
 
-?>
+
+public function Prendi_Avversari($id_giocatore,$id_lega){
+
+    $sql="SELECT g.nome as nome_avversario
+          FROM giocatore g
+          INNER JOIN giornata gn ON gn.id_giocatore2=g.id
+          WHERE gn.id_giocatore1='$id_giocatore' AND gn.id_lega='$id_lega' AND gn.risultato=0;";
+
+    $response=$this->conn->query($sql);
+
+    return $response;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

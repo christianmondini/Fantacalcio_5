@@ -29,6 +29,8 @@ $_SESSION["prova"]=1;
 
 $_SESSION["creatore"]=0;
 
+$_SESSION["inizio_campionato"]=0;
+
 /*
 if($_SESSION["prova"]==1){
     echo('<div class="row" id="avvertenza"><h1>Non sei registrato</h1></div>');

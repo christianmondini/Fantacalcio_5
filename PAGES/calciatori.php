@@ -9,7 +9,7 @@ $conn=$database->connect();
 
 $controller=new Controller($conn);
 
-$result=$controller->Get_Partecipanti($_SESSION["id_lega"]);
+$result=$controller->Get_Calciatori_Utente($_SESSION["id"],$_SESSION["id_lega"]);
 
 $giocatori=array();
 
@@ -19,20 +19,24 @@ while($row=$result->fetch_assoc()){
 
 ?>
 
-<div class="row text-center"><h1>I Partecipanti della lega</h1></div>
+<div class="row text-center"><h1>Ecco i tuoi giocatori</h1></div>
 
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">ID</th>
       <th scope="col">Nome</th>
+      <th scope="col">Ruolo</th>
+      <th scope="col">Squadra</th>
+      <th scope="col">Valore</th>
     </tr>
   </thead>
   <tbody>
     <?php foreach($giocatori as $giocatore):?>
     <tr>
-      <td><?php echo($giocatore["id_giocatore"])?></td>
-      <td><?php echo($giocatore["nome_giocatore"])?></td>
+      <td><?php echo($giocatore["nome"])?></td>
+      <td><?php echo($giocatore["ruolo"])?></td>
+      <td><?php echo($giocatore["squadra"])?></td>
+      <td><?php echo($giocatore["valore"])?> crediti</td>
     </tr>
     <?php endforeach;?>
   </tbody>

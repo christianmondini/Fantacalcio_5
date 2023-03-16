@@ -53,7 +53,8 @@ foreign key (id_calciatore) references calciatore(id)
 
 create table lega(
 id int auto_increment primary key,
-nome nvarchar(100) not null
+nome nvarchar(100) not null,
+campionato_iniziato bit(1)
 );
 
 
@@ -83,18 +84,18 @@ foreign key(id_lega) references lega(id)
 
 );
 
+create table giornata(
+id int auto_increment primary key,
+id_lega int,
+id_giocatore1 int,
+id_giocatore2 int,
+risultato int,
+foreign key (id_lega) references lega(id),
+foreign key (id_giocatore1) references giocatore(id),
+foreign key (id_giocatore2) references giocatore(id)
+);
 
 
-
-
-select s.id 
-from squadra s
-inner join import i on i.squadra=s.nome
-where s.nome=i.squadra;
-
-select c.nome, c.ruolo ,s.nome
-from calciatore c left join squadra s on s.id=c.id_squadra
-where s.nome="Milan";
 
 
 

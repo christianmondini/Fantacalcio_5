@@ -13,10 +13,10 @@
         <?php endif; ?>
         <?php if (isset($_SESSION["id_lega"])) : ?>
           <li class="nav-item">
-            <a class="nav-link active" id="navbar-text" href="?page=2">I tuoi giocatori</a>
+            <a class="nav-link active" id="navbar-text" href="?page=2">I tuoi calciatori</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" id="navbar-text" href="?page=1">Tutti i giocatori</a>
+            <a class="nav-link active" id="navbar-text" href="?page=1">Tutti i calciatori</a>
           </li>
 
         <?php endif; ?>
@@ -28,7 +28,16 @@
             <a class="nav-link active" id="navbar-text" href="?page=6">Togli i calciatori ai giocatori</a>
           </li>
         <?php endif; ?>
+
         <?php if ($_SESSION["id_lega"]) : ?>
+
+          <li class="nav-item">
+            <a class="nav-link active" id="navbar-text" href="?page=7">Giornata</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" id="navbar-text" href="?page=8">Giocatori lega</a>
+          </li>
 
           <li class="nav-item">
             <a class="nav-link active" id="navbar-text" href="?page=4">Esci</a>
