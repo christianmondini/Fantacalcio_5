@@ -36,6 +36,10 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link active" id="navbar-text" href="?page=9">Risultati</a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link active" id="navbar-text" href="?page=8">Giocatori lega</a>
           </li>
 

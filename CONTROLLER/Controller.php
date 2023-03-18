@@ -352,7 +352,7 @@ public function Prepara_Giornate($id_lega){
 
 public function Prendi_Avversari($id_giocatore,$id_lega){
 
-    $sql="SELECT g.nome as nome_avversario
+    $sql="SELECT gn.id as id,g.nome as nome_avversario
           FROM giocatore g
           INNER JOIN giornata gn ON gn.id_giocatore2=g.id
           WHERE gn.id_giocatore1='$id_giocatore' AND gn.id_lega='$id_lega' AND gn.risultato=0;";
@@ -363,17 +363,39 @@ public function Prendi_Avversari($id_giocatore,$id_lega){
 
 }
 
+public function Prendi_Risultati($id_giocatore,$id_lega){
+
+    $sql="SELECT g.id as id,g.nome as nome_avversario,gn.risultato as risultato
+          FROM giocatore g
+          INNER JOIN giornata gn ON gn.id_giocatore2=g.id
+          WHERE gn.id_giocatore1='$id_giocatore' AND gn.id_lega='$id_lega' AND gn.risultato!=0;";
+
+    $response=$this->conn->query($sql);
+
+    return $response;
+
+}
 
 
+public function Calcola_Giornata($id_giornata){
+    $risultato=random_int(1, 3);
 
+    $sql="UPDATE giornata
+          SET risultato='$risultato'
+          WHERE id='$id_giornata';";
+    
+    $this->conn->query($sql);
 
-
-
-
-
+    return $risultato;
+}
 
 
 
 
 
 }
+
+
+
+
+?>

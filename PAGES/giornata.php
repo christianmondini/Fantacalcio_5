@@ -3,18 +3,18 @@ require "../COMMON/connect.php";
 require "../CONTROLLER/Controller.php";
 
 
-$db=new Database();
+$db = new Database();
 
-$conn=$db->connect();
+$conn = $db->connect();
 
-$controller=new Controller($conn);
+$controller = new Controller($conn);
 
-$result=$controller->Prendi_Avversari($_SESSION["id"],$_SESSION["id_lega"]);
+$result = $controller->Prendi_Avversari($_SESSION["id"], $_SESSION["id_lega"]);
 
-$avversari=array();
+$avversari = array();
 
-while($row=$result->fetch_assoc()){
-    array_push($avversari,$row);
+while ($row = $result->fetch_assoc()) {
+    array_push($avversari, $row);
 }
 
 
@@ -23,15 +23,19 @@ while($row=$result->fetch_assoc()){
 
 <?php if ($_SESSION["inizio_campionato"] == 1) : ?>
 
-    
-<div class="row justify-content-center text-center">
+
+    <div class="row justify-content-center text-center">
         <h1>Giornata</h1>
-        <h1><?php echo($_SESSION["inizio_campionato"]);?></h1>
     </div>
 
     <hr>
 
 
+    <?php if($avversari==null):?>
+        <div class="row justify-content-center text-center">
+        <h1>Hai concluso le tue giornate</h1>
+    </div>
+        <?php elseif($avversari!=null):?>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -39,13 +43,19 @@ while($row=$result->fetch_assoc()){
                 <div class="card-body">
                     <h5 class="card-title"><b>Vuoi calcolare la giornata?</b></h5>
                     <h5 class="card-title">La tua prossima giornata è contro</h5>
-                    <h1><?php echo($avversari[0]["nome_avversario"]);?></h1>
+                    <h1><?php echo ($avversari[0]["nome_avversario"]); ?></h1>
                     <hr>
-                    <a href="" class="btn btn-danger">Calcola</a>
+                    <form action="../API/calcolaGiornata.php" method="post">
+                        <input type="hidden" name="id" value="<?php echo ($avversari[0]["id"]); ?>" />
+                        <button class="btn btn-danger" type="submit">Calcola</button>
+                    </form>
+
                 </div>
             </div>
         </div>
     </div>
+
+    <?php endif;?>
 
 
 <?php elseif ($_SESSION["inizio_campionato"] == 0 && $_SESSION["creatore"] == 1) : ?>

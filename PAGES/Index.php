@@ -51,15 +51,18 @@ if ($_SESSION["id"] == null) {
       case 5:
         require "assegna_calciatore.php";
         break;
-        case 6:
-          require "togli_calciatore.php";
-          break;
-          case 7:
-            require "giornata.php";
-            break;
-            case 8:
-              require "giocatori.php";
-              break;
+      case 6:
+        require "togli_calciatore.php";
+        break;
+      case 7:
+        require "giornata.php";
+        break;
+      case 8:
+        require "giocatori.php";
+        break;
+      case 9:
+        require "risultati.php";
+        break;
     }
   } else {
     require "leghe.php";
