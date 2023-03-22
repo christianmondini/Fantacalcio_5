@@ -44,6 +44,10 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link active" id="navbar-text" href="?page=10">Classifica</a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link active" id="navbar-text" href="?page=4">Esci</a>
           </li>
         <?php endif; ?>

@@ -46,6 +46,7 @@ while ($row = $result->fetch_assoc()) {
                     <h1><?php echo ($avversari[0]["nome_avversario"]); ?></h1>
                     <hr>
                     <form action="../API/calcolaGiornata.php" method="post">
+                        <input type="hidden" name="id_avversario" value="<?php echo ($avversari[0]["id_avversario"]); ?>" />
                         <input type="hidden" name="id" value="<?php echo ($avversari[0]["id"]); ?>" />
                         <button class="btn btn-danger" type="submit">Calcola</button>
                     </form>

@@ -63,6 +63,9 @@ if ($_SESSION["id"] == null) {
       case 9:
         require "risultati.php";
         break;
+      case 10:
+        require "classifica.php";
+        break;
     }
   } else {
     require "leghe.php";
