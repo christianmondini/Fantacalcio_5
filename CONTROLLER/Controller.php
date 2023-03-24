@@ -272,6 +272,17 @@ class Controller
         return $id["id"];
     }
 
+    public function GetRicorrenzeCalciatore($id_lega,$id_calciatore){
+        $sql="SELECT g.nome as nome
+              FROM giocatore g
+              INNER JOIN giocatore_calciatore gc ON g.id=gc.id_giocatore
+              WHERE gc.id_lega='$id_lega' AND gc.id_calciatore='$id_calciatore';";
+
+        $result=$this->conn->query($sql);
+
+        return $result;
+    }
+
     /*-------------------------------------------------------------OPZIONI GIORNATA-------------------------------------------------------------------------------------------*/
 
 
@@ -452,7 +463,7 @@ class Controller
           INNER JOIN giocatore_lega gl ON gl.id_lega=l.id
           LEFT JOIN giocatore g ON g.id=gl.id_giocatore
           WHERE l.id='$id_lega'
-          ORDER BY gl.punti ASC;";
+          ORDER BY gl.punti DESC;";
 
         $result = $this->conn->query($sql);
 
@@ -468,5 +479,61 @@ class Controller
         $result = $this->conn->query($sql);
 
         return $result;
+    }
+
+
+
+
+    public function PrendiGiornateMancanti($id_lega)
+    {
+        $sql = "SELECT id
+              FROM giornata 
+              WHERE id_lega='$id_lega' AND risultato=0;";
+
+        $result = $this->conn->query($sql);
+
+        return $result;
+    }
+
+
+    public function PrendiVincitore($id_lega)
+    {
+        $sql = "SELECT g.nome
+              FROM giocatore g
+              INNER JOIN giocatore_lega gl ON gl.id_giocatore=g.id
+              WHERE gl.id_lega='$id_lega'
+              ORDER BY punti DESC 
+              LIMIT 1;";
+
+        $result = $this->conn->query($sql);
+
+        return $result;
+    }
+
+
+    public function RestartCampionato($id_lega)
+    {
+        $sql = "DELETE 
+              FROM giornata
+              WHERE id_lega='$id_lega';";
+
+        $this->conn->query($sql);
+
+        unset($sql);
+
+        $sql = "UPDATE giocatore_lega
+              SET punti=0
+              WHERE id_lega='$id_lega';";
+
+        $this->conn->query($sql);
+
+        unset($sql);
+
+        $sql="UPDATE lega
+              SET campionato_iniziato=0
+              WHERE id='$id_lega';";
+              
+        $this->conn->query($sql);
+            
     }
 }

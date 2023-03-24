@@ -3,6 +3,12 @@
 
 <div class="row justify-content-center">
 
+<?php if($_SESSION["possessore"]!=null):?>
+<div class="row justify-content-center text-center">
+            <h1 style="color:red;">Il calciatore appartiene già a <?php echo($_SESSION["possessore"]);?></h1>
+        </div>
+<?php endif;?>
+
 <form method="post" action="../API/assegnaCalciatore.php">
 
     <div class="row d-flex justify-content-center align-items-center">

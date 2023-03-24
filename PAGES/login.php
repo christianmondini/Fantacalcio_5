@@ -31,6 +31,8 @@ $_SESSION["creatore"]=0;
 
 $_SESSION["inizio_campionato"]=0;
 
+$_SESSION["possessore"]=null;
+
 
 /*
 if($_SESSION["prova"]==1){
