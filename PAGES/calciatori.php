@@ -17,6 +17,9 @@ while($row=$result->fetch_assoc()){
     array_push($giocatori,$row);
 }
 
+
+
+
 ?>
 
 <div class="row text-center"><h1>Ecco i tuoi giocatori</h1></div>

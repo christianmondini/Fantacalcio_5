@@ -121,7 +121,13 @@ $nome_vincitore = $vincitore["nome"];
     <?php endif; ?>
 
 
-<?php elseif ($_SESSION["inizio_campionato"] == 0 && $_SESSION["creatore"] == 1&&$giornate==null) : ?>
+<?php elseif ($_SESSION["inizio_campionato"] == 0 && $_SESSION["creatore"] == 1 && $giornate==null) : ?>
+
+    <?php if($_SESSION["calciatori_insufficienti"]==1):?>
+        <div class="row justify-content-center text-center">
+        <h1 style="color:red;"><b>I partecipanti non hanno abbastanza calciatori</b></h1>
+    </div>
+    <?php endif;?>
 
     <div class="container">
         <div class="row justify-content-center">

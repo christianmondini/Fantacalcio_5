@@ -150,8 +150,8 @@ class Controller
         $id_lega = $this->Get_ID_Lega($nome_lega);
         echo ($id_lega);
 
-        $sql = "INSERT INTO giocatore_lega(id_giocatore,id_lega,creatore)
-          VALUES ('$id_giocatore','$id_lega','1');";
+        $sql = "INSERT INTO giocatore_lega(id_giocatore,id_lega,creatore,punti)
+          VALUES ('$id_giocatore','$id_lega','1',0);";
 
         $this->conn->query($sql);
     }
@@ -281,6 +281,121 @@ class Controller
         $result=$this->conn->query($sql);
 
         return $result;
+    }
+
+    public function Get_Portieri($id_giocatore,$id_lega){
+
+        $sql="SELECT c.id as id,c.nome as nome
+              FROM calciatore c
+              INNER JOIN giocatore_calciatore gc ON gc.id_calciatore=c.id
+              WHERE gc.id_giocatore='$id_giocatore' AND gc.id_lega='$id_lega' AND c.ruolo='P';";
+
+        $result=$this->conn->query($sql);
+
+
+        $portieri=array();
+        
+        while($row=$result->fetch_assoc()){
+            array_push($portieri,$row);
+        }
+
+
+        return $portieri;
+    }
+
+    public function Get_Difensori($id_giocatore,$id_lega){
+
+        $sql="SELECT c.id as id,c.nome as nome
+              FROM calciatore c
+              INNER JOIN giocatore_calciatore gc ON gc.id_calciatore=c.id
+              WHERE gc.id_giocatore='$id_giocatore' AND gc.id_lega='$id_lega' AND c.ruolo='D';";
+
+        $result=$this->conn->query($sql);
+
+
+        $difensori=array();
+        
+        while($row=$result->fetch_assoc()){
+            array_push($difensori,$row);
+        }
+
+
+        return $difensori;
+    }
+
+    public function Get_Centrocampisti($id_giocatore,$id_lega){
+
+        $sql="SELECT c.id as id,c.nome as nome
+              FROM calciatore c
+              INNER JOIN giocatore_calciatore gc ON gc.id_calciatore=c.id
+              WHERE gc.id_giocatore='$id_giocatore' AND gc.id_lega='$id_lega' AND c.ruolo='C';";
+
+        $result=$this->conn->query($sql);
+
+
+        $centrocampisti=array();
+        
+        while($row=$result->fetch_assoc()){
+            array_push($centrocampisti,$row);
+        }
+
+
+        return $centrocampisti;
+    }
+
+    public function Get_Attaccanti($id_giocatore,$id_lega){
+
+        $sql="SELECT c.id as id,c.nome as nome
+              FROM calciatore c
+              INNER JOIN giocatore_calciatore gc ON gc.id_calciatore=c.id
+              WHERE gc.id_giocatore='$id_giocatore' AND gc.id_lega='$id_lega' AND c.ruolo='A';";
+
+        $result=$this->conn->query($sql);
+
+
+        $attaccanti=array();
+        
+        while($row=$result->fetch_assoc()){
+            array_push($attaccatni,$row);
+        }
+
+
+        return $attaccanti;
+    }
+
+
+    public function ControllaNumeroCalciatori($id_giocatore,$id_lega){
+
+        $calciatori=array();
+       
+        $portieri=$this->Get_Portieri($id_giocatore,$id_lega);
+
+        array_push($calciatori,$portieri);
+
+        $difensori=$this->Get_Difensori($id_giocatore,$id_lega);
+        array_push($calciatori,$difensori);
+
+        $centrocampisti=$this->Get_Centrocampisti($id_giocatore,$id_lega);
+
+        array_push($calciatori,$centrocampisti);
+
+        $attaccanti=$this->Get_Attaccanti($id_giocatore,$id_lega);
+
+        array_push($calciatori,$attaccanti);
+
+        //Controllo se tutti i ruoli sono giustamente coperti
+
+        if($calciatori==25){
+            if($portieri==3 && $difensori==8 && $centrocampisti==8 && $attaccanti==6){
+                    return 1;
+            }else{
+                return 0;
+            }
+
+        }else{
+            return 0;;
+        }
+
     }
 
     /*-------------------------------------------------------------OPZIONI GIORNATA-------------------------------------------------------------------------------------------*/

@@ -33,6 +33,8 @@ $_SESSION["inizio_campionato"]=0;
 
 $_SESSION["possessore"]=null;
 
+$_SESSION["calciatori_insufficienti"]=0;
+
 
 /*
 if($_SESSION["prova"]==1){
