@@ -20,6 +20,15 @@ while ($row = $result->fetch_assoc()) {
 ?>
 
 
+<?php if($_SESSION["vuoto"]==1):?>
+<div class="row text-center">
+    <h1 style="color:red;">Devi dare un nome alla tua lega</h1>
+</div>
+
+<?php endif;?>
+
+
+
 <div class="row text-center">
   <h1>Le tue Leghe</h1>
 </div>

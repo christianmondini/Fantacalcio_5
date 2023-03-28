@@ -26,6 +26,13 @@ session_start();
 
 ?>
 
+<?php if($_SESSION["vuoto"]==1):?>
+<div class="row text-center">
+    <h1 style="color:red;">Non hai riempito tutti i campi richiesti</h1>
+</div>
+
+<?php endif;?>
+
 
 <form method="post" action="../API/signup.php">
 
