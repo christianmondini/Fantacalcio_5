@@ -35,6 +35,8 @@ $_SESSION["possessore"]=null;
 
 $_SESSION["calciatori_insufficienti"]=0;
 
+$_SESSION["giocatori_insufficienti"]=0;
+
 $_SESSION["vuoto"]=0;
 
 
