@@ -31,7 +31,7 @@ $_SESSION["creatore"]=0;
 
 $_SESSION["inizio_campionato"]=0;
 
-$_SESSION["possessore"]=null;
+$_SESSION["possessore"]="";
 
 $_SESSION["calciatori_insufficienti"]=0;
 

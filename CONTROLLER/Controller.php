@@ -190,14 +190,17 @@ class Controller
 
     public function Get_Calciatori()
     {
-        $sql = "SELECT c.nome as nome,ruolo as ruolo , s.nome as squadra,valore_iniziale as valore
+        $sql = "SELECT c.nome as nome,c.ruolo as ruolo , s.nome as squadra,valore_iniziale as valore
               FROM  calciatore c
-              LEFT JOIN squadra s ON s.id=c.id_squadra;";
+              LEFT JOIN squadra s ON s.id=c.id_squadra
+              ORDER BY c.ruolo;";
 
         $result = $this->conn->query($sql);
 
         return $result;
     }
+
+    //NON FINITA
 
     public function Get_Calciatori_Altrui($id_giocatore, $id_lega)
     {
@@ -221,7 +224,8 @@ class Controller
               LEFT JOIN squadra s ON s.id=c.id_squadra
               INNER JOIN giocatore_calciatore gc ON gc.id_calciatore=c.id
               LEFT JOIN giocatore g ON g.id=gc.id_giocatore 
-              WHERE g.id='$id_giocatore' AND gc.id_lega='$id_lega';";
+              WHERE g.id='$id_giocatore' AND gc.id_lega='$id_lega'
+              ORDER BY c.ruolo;";
 
         $response = $this->conn->query($sql);
 
@@ -356,7 +360,7 @@ class Controller
         $attaccanti=array();
         
         while($row=$result->fetch_assoc()){
-            array_push($attaccatni,$row);
+            array_push($attaccanti,$row);
         }
 
 
@@ -366,27 +370,29 @@ class Controller
 
     public function ControllaNumeroCalciatori($id_giocatore,$id_lega){
 
-        $calciatori=array();
+        $calciatori=0;
        
         $portieri=$this->Get_Portieri($id_giocatore,$id_lega);
 
-        array_push($calciatori,$portieri);
+        $n_portieri=count($portieri);
 
         $difensori=$this->Get_Difensori($id_giocatore,$id_lega);
-        array_push($calciatori,$difensori);
+        $n_difensori=count($difensori);
 
         $centrocampisti=$this->Get_Centrocampisti($id_giocatore,$id_lega);
 
-        array_push($calciatori,$centrocampisti);
+        $n_centrocampisti=count($centrocampisti);
 
         $attaccanti=$this->Get_Attaccanti($id_giocatore,$id_lega);
+        $n_attaccanti=count($attaccanti);
 
-        array_push($calciatori,$attaccanti);
+
+        $calciatori=$n_attaccanti+$n_centrocampisti+$n_difensori+$n_portieri;
 
         //Controllo se tutti i ruoli sono giustamente coperti
 
         if($calciatori==25){
-            if($portieri==3 && $difensori==8 && $centrocampisti==8 && $attaccanti==6){
+            if($n_portieri==3 && $n_difensori==8 && $n_centrocampisti==8 && $n_attaccanti==6){
                     return 1;
             }else{
                 return 0;

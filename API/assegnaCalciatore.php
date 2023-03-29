@@ -26,13 +26,15 @@ $id_calciatore = $result;
 
 unset($result);
 
-$result = $controller->GetRicorrenzeCalciatore($_SESSION["id_lega"], $id_calciatore["id"]);
+$result = $controller->GetRicorrenzeCalciatore($_SESSION["id_lega"], $id_calciatore);
 
 $giocatore = $result->fetch_assoc();
 
-if ($giocatore != null) {
+
+
+if ($giocatore["nome"]!=null) {
     $_SESSION["possessore"] = $giocatore["nome"];
-    header("Location: http://localhost/Fantacalcio_5/Pages/Index.php?page=2");
+    header("Location: http://localhost/Fantacalcio_5/Pages/Index.php?page=5");
 } else {
     $controller->AssegnaCalciatore($nome_giocatore, $nome_calciatore, $_SESSION["id_lega"]);
 
