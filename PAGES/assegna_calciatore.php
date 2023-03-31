@@ -29,7 +29,7 @@
                             <input type="text" id="password" name="nome_giocatore" class="form-control form-control-lg" />
 
                         </div>
-                        <button class="btn btn-outline-light btn-lg px-5 btn-danger" type="submit">Assegna calciatore</button>
+                        <button class="btn btn-outline-light btn-lg px-5 btn-success" type="submit">Assegna calciatore</button>
 
 
                     </div>

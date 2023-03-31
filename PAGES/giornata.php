@@ -69,9 +69,8 @@ $nome_vincitore = $vincitore["nome"];
             <div class="card text-center" style="width: 25rem; margin-top:100px;">
                 <div class="card-body">
                     <h5 class="card-title"><b>Vuoi restartare il campionato?</b></h5>
-                    <h5 class="card-title">La tua prossima giornata è contro</h5>
                     <hr>
-                    <a href="../API/restartaCampionato.php" class="btn btn-danger">Ricomincia</a>
+                    <a href="../API/restartaCampionato.php" class="btn btn-success">Ricomincia</a>
 
                 </div>
             </div>
@@ -109,8 +108,8 @@ $nome_vincitore = $vincitore["nome"];
                         <hr>
                         <form action="../API/calcolaGiornata.php" method="post">
                             <input type="hidden" name="id_avversario" value="<?php echo ($avversari[0]["id_avversario"]); ?>" />
-                            <input type="hidden" name="id" value="<?php echo ($avversari[0]["id"]); ?>" />
-                            <button class="btn btn-danger" type="submit">Calcola</button>
+                            <input type="hidden" name="id" value="<?php echo ($avversari[0]["id"]); ?>" /><!--id è l'id della giornata-->
+                            <button class="btn btn-success" type="submit">Calcola</button>
                         </form>
 
                     </div>
@@ -135,7 +134,7 @@ $nome_vincitore = $vincitore["nome"];
                 <div class="card-body">
                     <h5 class="card-title"><b>Fai iniziare il campionato</b></h5>
                     <hr>
-                    <a href="../API/inizioCampionato.php" class="btn btn-danger">Inizia</a>
+                    <a href="../API/inizioCampionato.php" class="btn btn-success">Inizia</a>
                 </div>
             </div>
         </div>
