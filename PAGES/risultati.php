@@ -36,19 +36,19 @@ while ($row = $result->fetch_assoc()) {
   <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nome</th>
+        <th scope="col">Avversario</th>
+        <th scope="col">Esito</th>
       </tr>
     </thead>
     <tbody>
       <?php foreach ($avversari as $avversario) : ?>
         <tr>
           <td><?php echo ($avversario["nome_avversario"]); ?></td>
-          <td><?php if ($avversario["risultato"] == 1) {
+          <td><?php if ($avversario["risultato"] == 3) {
                 echo ("Hai vinto");
               } elseif ($avversario["risultato"] == 2) {
                 echo ("Hai pareggiato");
-              } elseif ($avversario["risultato"] == 3) {
+              } elseif ($avversario["risultato"] == 1) {
                 echo ("Hai perso");
               } ?></td>
         </tr>

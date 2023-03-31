@@ -545,8 +545,9 @@ class Controller
     {
         if ($risultato == 3) {
             $sql = "UPDATE giocatore_lega 
-                SET punti=punti+3;
-                    WHERE id_giocatore='$id_giocatore' AND id_lega='$id_lega'";
+            SET punti=punti+3
+                    WHERE id_giocatore='$id_giocatore' AND id_lega='$id_lega'
+                    ;";
 
             $this->conn->query($sql);
         } else if ($risultato == 2) {
