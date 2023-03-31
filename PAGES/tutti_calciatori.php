@@ -41,7 +41,7 @@ while ($row = $result->fetch_assoc()) {
           <?php elseif ($giocatore["ruolo"] == "D") : ?>
             <h2 style="color:green;"><?php echo ($giocatore["ruolo"]) ?></h2>
           <?php elseif ($giocatore["ruolo"] == "C") : ?>
-            <h2 style="color:yellow;"><?php echo ($giocatore["ruolo"]) ?></h2>
+            <h2 style="color:orange;"><?php echo ($giocatore["ruolo"]) ?></h2>
           <?php elseif ($giocatore["ruolo"] == "A") : ?>
             <h2 style="color:red;"><?php echo ($giocatore["ruolo"]) ?></h2>
           <?php endif; ?>
