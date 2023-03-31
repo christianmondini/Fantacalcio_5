@@ -44,7 +44,8 @@ $pareggio=0;
 for($i=0;$i<count($vincitori);$i++){
    
      for($j=0;$j<count($vincitori);$j++){
-        if($i!=$j && $vincitori[$i]["punti"]==$vincitori[$j]["punti"]){
+        if($i!=$j && $vincitori[$i]["punti"]==$vincitori[$j]["punti"])//Se non sono lo stesso giocatore ma hanno gli stessi punti
+        {
             $pareggio++;
         }
      }
