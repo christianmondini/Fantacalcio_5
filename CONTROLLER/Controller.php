@@ -620,12 +620,11 @@ class Controller
 
     public function PrendiVincitore($id_lega)
     {
-        $sql = "SELECT g.nome
+        $sql = "SELECT g.nome as nome,gl.punti as punti
               FROM giocatore g
               INNER JOIN giocatore_lega gl ON gl.id_giocatore=g.id
               WHERE gl.id_lega='$id_lega'
-              ORDER BY punti DESC 
-              LIMIT 1;";
+              ORDER BY punti DESC;";
 
         $result = $this->conn->query($sql);
 

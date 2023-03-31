@@ -33,9 +33,15 @@ unset($result);
 
 $result = $controller->PrendiVincitore($_SESSION["id_lega"]);
 
-$vincitore = $result->fetch_assoc();
+$vincitori = array();
 
-$nome_vincitore = $vincitore["nome"];
+while ($row = $result->fetch_assoc()) {
+    array_push($vincitori, $row);
+}
+
+
+
+
 
 
 
@@ -43,26 +49,55 @@ $nome_vincitore = $vincitore["nome"];
 
 
 <?php if ($_SESSION["inizio_campionato"] == 1 && $giornate == null && $_SESSION["creatore"] == 0) : ?>
-    <div class="row justify-content-center text-center">
-        <h1>Il campionato è terminato il vincitore è</h1>
-    </div>
 
-    <div class="row justify-content-center text-center">
-        <h1><b><?php echo ($nome_vincitore); ?></b></h1>
-    </div>
+    <?php if (count($vincitori) == 1) : ?>
+        <div class="row justify-content-center text-center">
+            <h1>Il campionato è terminato il vincitore è</h1>
+        </div>
+
+
+        <div class="row justify-content-center text-center">
+            <h1><b><?php echo ($vincitori[0]["nome"]); ?></b></h1>
+        </div>
+
+    <?php else : ?>
+        <div class="row justify-content-center text-center">
+            <h1>Il campionato è terminato in pareggio tra</h1>
+        </div>
+
+        <?php foreach ($vincitori as $vincitore) : ?>
+            <div class="row justify-content-center text-center">
+                <h1><b><?php print_r($vincitore["nome"]); ?></b></h1>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 
     <div class="row justify-content-center text-center">
         <h1>Per rigiocare aspetta che il creatore della lega restrarti il campionato</h1>
     </div>
 
 <?php elseif ($_SESSION["inizio_campionato"] == 1 && $giornate == null && $_SESSION["creatore"] == 1) : ?>
-    <div class="row justify-content-center text-center">
-        <h1>Il campionato è terminato il vincitore è</h1>
-    </div>
+    <?php if (count($vincitori) == 1) : ?>
+        <div class="row justify-content-center text-center">
+            <h1>Il campionato è terminato il vincitore è</h1>
+        </div>
 
-    <div class="row justify-content-center text-center">
-        <h1><b><?php echo ($nome_vincitore); ?></b></h1>
-    </div>
+
+        <div class="row justify-content-center text-center">
+            <h1><b><?php echo ($vincitori[0]["nome"]); ?></b></h1>
+        </div>
+
+    <?php else : ?>
+        <div class="row justify-content-center text-center">
+            <h1>Il campionato è terminato in pareggio tra</h1>
+        </div>
+
+        <?php foreach ($vincitori as $vincitore) : ?>
+            <div class="row justify-content-center text-center">
+                <h1><b><?php print_r($vincitore["nome"]); ?></b></h1>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -120,13 +155,13 @@ $nome_vincitore = $vincitore["nome"];
     <?php endif; ?>
 
 
-<?php elseif ($_SESSION["inizio_campionato"] == 0 && $_SESSION["creatore"] == 1 && $giornate==null) : ?>
+<?php elseif ($_SESSION["inizio_campionato"] == 0 && $_SESSION["creatore"] == 1 && $giornate == null) : ?>
 
-    <?php if($_SESSION["calciatori_insufficienti"]==1):?>
+    <?php if ($_SESSION["calciatori_insufficienti"] == 1) : ?>
         <div class="row justify-content-center text-center">
-        <h1 style="color:red;"><b>I partecipanti non hanno abbastanza calciatori</b></h1>
-    </div>
-    <?php endif;?>
+            <h1 style="color:red;"><b>I partecipanti non hanno abbastanza calciatori</b></h1>
+        </div>
+    <?php endif; ?>
 
     <div class="container">
         <div class="row justify-content-center">
