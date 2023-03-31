@@ -11,6 +11,7 @@ $controller=new Controller($conn);
 
 $controller->RestartCampionato($_SESSION["id_lega"]);
 
+
 header("Location: http://localhost/Fantacalcio_5/Pages/Index.php?page=7");
 
 ?>
