@@ -39,7 +39,16 @@ while ($row = $result->fetch_assoc()) {
     array_push($vincitori, $row);
 }
 
+$pareggio=0;
 
+for($i=0;$i<count($vincitori);$i++){
+   
+     for($j=0;$j<count($vincitori);$j++){
+        if($i!=$j && $vincitori[$i]["punti"]==$vincitori[$j]["punti"]){
+            $pareggio++;
+        }
+     }
+}
 
 
 
@@ -50,7 +59,7 @@ while ($row = $result->fetch_assoc()) {
 
 <?php if ($_SESSION["inizio_campionato"] == 1 && $giornate == null && $_SESSION["creatore"] == 0) : ?>
 
-    <?php if (count($vincitori) == 1) : ?>
+    <?php if ($pareggio==0) : ?>
         <div class="row justify-content-center text-center">
             <h1>Il campionato è terminato il vincitore è</h1>
         </div>
@@ -65,11 +74,11 @@ while ($row = $result->fetch_assoc()) {
             <h1>Il campionato è terminato in pareggio tra</h1>
         </div>
 
-        <?php foreach ($vincitori as $vincitore) : ?>
+        <?php for($i=0;$i<$pareggio;$i++) : ?>
             <div class="row justify-content-center text-center">
-                <h1><b><?php print_r($vincitore["nome"]); ?></b></h1>
+                <h1><b><?php print_r($vincitori[$i]["nome"]); ?></b></h1>
             </div>
-        <?php endforeach; ?>
+        <?php endfor; ?>
     <?php endif; ?>
 
     <div class="row justify-content-center text-center">
@@ -77,7 +86,7 @@ while ($row = $result->fetch_assoc()) {
     </div>
 
 <?php elseif ($_SESSION["inizio_campionato"] == 1 && $giornate == null && $_SESSION["creatore"] == 1) : ?>
-    <?php if (count($vincitori) == 1) : ?>
+    <?php if ($pareggio==0) : ?>
         <div class="row justify-content-center text-center">
             <h1>Il campionato è terminato il vincitore è</h1>
         </div>
@@ -92,11 +101,11 @@ while ($row = $result->fetch_assoc()) {
             <h1>Il campionato è terminato in pareggio tra</h1>
         </div>
 
-        <?php foreach ($vincitori as $vincitore) : ?>
+        <?php for($i=0;$i<$pareggio;$i++) : ?>
             <div class="row justify-content-center text-center">
-                <h1><b><?php print_r($vincitore["nome"]); ?></b></h1>
+                <h1><b><?php print_r($vincitori[$i]["nome"]); ?></b></h1>
             </div>
-        <?php endforeach; ?>
+        <?php endfor; ?>
     <?php endif; ?>
 
     <div class="container">
