@@ -54,7 +54,6 @@ for($i=0;$i<count($vincitori);$i++){
 
 
 
-
 ?>
 
 
@@ -171,7 +170,11 @@ for($i=0;$i<count($vincitori);$i++){
         <div class="row justify-content-center text-center">
             <h1 style="color:red;"><b>I partecipanti non hanno abbastanza calciatori</b></h1>
         </div>
-    <?php endif; ?>
+    <?php elseif($_SESSION["giocatori_insufficienti"]==1): ?>
+        <div class="row justify-content-center text-center">
+            <h1 style="color:red;"><b>Non ci sono abbastanza partecipanti per iniziare il campionato</b></h1>
+        </div>
+    <?php endif;?>
 
     <div class="container">
         <div class="row justify-content-center">
